@@ -75,19 +75,19 @@
         components: {
         },
         computed: {
-            logged(){
+            logged() {
                 return this.$store.state.loggedIn
             }
         },
         methods: {
-            logging(){
+            logging() {
                 var obj = {
                     email: this.email,
                     password: this.password
                 }
                 this.$store.dispatch('login', obj)
             },
-            registering(){
+            registering() {
                 console.log("attempting")
                 var obj = {
                     email: this.email,
@@ -97,9 +97,20 @@
                 }
                 this.$store.dispatch('createAccount', obj)
             },
-            logout(){
+            logout() {
                 this.$store.dispatch('logout')
-            }
+            },
+            addVault() {
+                var obj = {
+                    title: this.name,
+                    description: this.description,
+                    keep: this.current
+                }
+                this.$store.dispatch('addVault', obj)
+                this.dialog2 = false
+                this.bar = false
+            },
+            
         },
         mounted() {
         }

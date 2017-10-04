@@ -9,7 +9,8 @@ var schema = new mongoose.Schema({
 	url: {type: String},
 	// Relations
 	creatorId: { type: ObjectId, ref: models.user.name, required: true },
-	vaults: {type: Array}
+	vaults: {type: Array},
+	views: {type: Number, default: 0}
 });
 
 module.exports = mongoose.model(models.keep.name, schema);

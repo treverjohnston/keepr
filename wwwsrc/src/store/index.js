@@ -136,7 +136,7 @@ var store = new vuex.Store({
     },
     mutations: {
         resetState(state, item) {
-                state.current = {},
+            state.current = {},
                 state.keeps = {},
                 state.vaults = {},
                 state.currentVault = {},
@@ -172,8 +172,8 @@ var store = new vuex.Store({
             for (var i = 0; i < obj.length; i++) {
                 // console.log(obj[i])
                 var item = obj[i]
-                    vue.set(state.vaults, item._id, item)
-                
+                vue.set(state.vaults, item._id, item)
+
             }
             // console.log('setting vaults', state.vaults)
         },
@@ -212,6 +212,17 @@ var store = new vuex.Store({
         }
     },
     actions: {
+        sendDesign({ commit, dispatch }, payload) {
+            console.log('dis is payload', payload[0])
+            api.post('keeps', payload[0])
+                .then(res => {
+                    console.log('dis is res', res)
+                    dispatch('getKeeps')
+                })
+                .catch(err => {
+                    commit('handleError', err)
+                })
+        },
         deleteVault({ commit, dispatch }, obj) {
             api.delete(`vaults/${obj.keepId}`)
                 .then(res => {
@@ -293,12 +304,14 @@ var store = new vuex.Store({
             api.post('vaults', obj)
                 .then(res => {
                     commit('addVault', res.data.data)
-                    var keep = {
-                        vault: res.data.data,
-                        keep: obj.keep
+                    if (obj.keep) {
+                        var keep = {
+                            vault: res.data.data,
+                            keep: obj.keep
+                        }
+                        // console.log("res", res)
+                        dispatch('addKeep', keep)
                     }
-                    // console.log("res", res)
-                    dispatch('addKeep', keep)
                 })
                 .catch(err => {
                     console.log("eerrrroror")
@@ -342,8 +355,8 @@ var store = new vuex.Store({
                             commit('handleError', err)
                             router.push('/')
                         })
-                        commit('setLogged')    
-                        commit('resetState')                        
+                    commit('setLogged')
+                    commit('resetState')
                     console.log(res)
                 })
         },
@@ -376,7 +389,7 @@ var store = new vuex.Store({
                 .then(res => {
                     console.log(res)
                     commit('setLogged')
-                    commit('resetState')                    
+                    commit('resetState')
                 }).catch(err => {
                     commit('handleError', err)
                     router.push('/')
