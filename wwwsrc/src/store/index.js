@@ -132,7 +132,8 @@ var store = new vuex.Store({
         currentVault: {},
         currentKeeps: {},
         profileInfo: {},
-        profileVaults: {}
+        profileVaults: {},
+        userKeeps: {}
     },
     mutations: {
         resetState(state, item) {
@@ -184,8 +185,12 @@ var store = new vuex.Store({
                 var item = obj[i]
                 vue.set(state.profileVaults, item._id, item)
             }
-            // vue.set(state.profileVaults, obj._id, obj)
-            // console.log('set vaults', state.profileVaults)
+        },
+        setUserKeeps(state, obj) {
+            for (var i = 0; i < obj.length; i++) {
+                var item = obj[i]
+                vue.set(state.userKeeps, item._id, item)
+            }
         },
         setKeeps(state, obj) {
             // console.log('ojb', obj)
@@ -292,6 +297,19 @@ var store = new vuex.Store({
                 .then(res => {
                     // console.log('profileVaults',res)
                     commit('setProfileVaults', res.data.data)
+                })
+                .catch(err => {
+                    console.log("eerrrroror")
+                    commit('handleError', err)
+                    // router.push('/')
+                })
+        },
+        getUserKeeps({ commit, dispatch }, id) {
+            // console.log("id", id)
+            api(`uservaults/${id}/keeps`)
+                .then(res => {
+                    // console.log('profileVaults',res)
+                    commit('setUserKeeps', res.data.data)
                 })
                 .catch(err => {
                     console.log("eerrrroror")

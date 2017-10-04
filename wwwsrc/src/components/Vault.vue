@@ -6,12 +6,18 @@
                 <vaultview :item="item"></vaultview>
               </v-flex>
             </v-layout>
+            <v-layout row justify-space-around>
+              <v-flex xs12 sm4 md3 lg2 v-masonry-tile fit-width="true" class="item" v-for="item in keeps">
+                <hellocard :item="item"></hellocard>
+              </v-flex>
+            </v-layout>
           </div>
         </div>
       </template>
       
       <script>
         import Vaultview from './Vaultview'
+        import Hellocard from './HelloCard'
         export default {
           name: 'vault',
           data() {
@@ -20,11 +26,15 @@
             }
           },
           components: {
-            Vaultview
+            Vaultview,
+            Hellocard
           },
           computed: {
             blocks() {
               return this.$store.state.currentKeeps
+            },
+            keeps() {
+              return this.$store.state.userKeeps
             }
           },
           methods: {

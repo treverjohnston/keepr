@@ -7,6 +7,11 @@
                         <vaultcard :item="item"></vaultcard>
                     </v-flex>
                 </v-layout>
+                <v-layout row justify-space-around>
+                    <v-flex xs12 sm4 md3 lg2 v-masonry-tile fit-width="true" class="item" v-for="item in keeps">
+                        <keepview :item="item"></keepview>
+                    </v-flex>
+                </v-layout>
             </div>
         </div>
         <div v-else>
@@ -17,6 +22,7 @@
 
 <script>
     import Vaultcard from './VaultCard'
+    import Keepview from './Keepview'
     export default {
         name: 'profile',
         data() {
@@ -24,6 +30,7 @@
             }
         },
         components: {
+            Keepview
         },
         computed: {
             info() {
@@ -34,6 +41,9 @@
             },
             loggedIn() {
                 return this.$store.state.loggedIn
+            },
+            keeps() {
+              return this.$store.state.userKeeps
             }
         },
         methods: {
@@ -41,8 +51,9 @@
         mounted() {
             this.$store.dispatch('getUserVaults')
             this.$store.dispatch('getArtistProfile', this.$route.params.profileId)
+            this.$store.dispatch('getUserKeeps', this.$route.params.profileId)
         },
-        components:{
+        components: {
             Vaultcard
         }
     }
@@ -51,14 +62,13 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+    .item {
+        padding: 0 .5vw 0 .5vw;
+        margin: 0 auto;
+    }
 
-.item {
-    padding: 0 .5vw 0 .5vw;
-    margin: 0 auto;
-  }
-
-  .hellocards {
-    max-width: 95vw;
-    margin: 0 auto;
-  }
+    .hellocards {
+        max-width: 95vw;
+        margin: 0 auto;
+    }
 </style>
