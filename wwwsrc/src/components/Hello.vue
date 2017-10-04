@@ -31,14 +31,13 @@
       refresh() {
         this.$redrawVueMasonry();
         // console.log("refreshing")
-        setTimeout(this.refresh, 500);
+        // setTimeout(this.refresh, 500);
       },
     },
     mounted() {
       this.refresh();
       this.$store.dispatch('getUserVaults');
       this.$store.dispatch('getKeeps');
-
     }
   }
 

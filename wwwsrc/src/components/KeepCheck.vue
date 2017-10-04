@@ -1,10 +1,6 @@
 <template>
     <div class="keepcheck">
-        <!-- <v-layout class="elevation-24"> -->
         <v-card>
-            <!-- <v-flex xs12>
-                <img :src="item.url" class="img img-responsive">
-            </v-flex> -->
             <v-flex xs12>
                 <v-card-title primary-title class="text-xs-center">
                     <h3 class="headline mb-0">What vault do you want to keep this in?</h3>
@@ -35,7 +31,6 @@
                 </v-list>
             </v-bottom-sheet>
         </v-card>
-        <!-- </v-layout> -->
     </div>
 </template>
 

@@ -47,7 +47,10 @@
         computed: {
             user() {
                 return this.$store.state.userInfo;
-            }
+            },
+            // vaults(){
+            //     this.$store.state.profileVaults
+            // }
         },
         methods: {
             redraw() {
@@ -63,6 +66,10 @@
                 this.$store.commit('setKeep', item)
             },
             deleteVault(id) {
+                var obj ={
+                    keepId: id,
+                    userId: this.user._id
+                }
                 var _this = this
                 swal({
                     title: 'Are you sure?',
@@ -73,7 +80,7 @@
                     cancelButtonColor: '#d33',
                     confirmButtonText: 'Yes, delete it!'
                 }).then(function () {
-                    _this.$store.dispatch('deleteVault', id)
+                    _this.$store.dispatch('deleteVault', obj)
                     swal(
                         'Deleted!',
                         'Your file has been deleted.',
