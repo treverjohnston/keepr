@@ -13,6 +13,19 @@ module.exports = {
           return next(handleResponse(action, null, error))
         })
     }
+  },
+  profileVaults: {
+    path: '/uservaults/:userId/vaults',
+    reqType: 'get',
+    method(req, res, next){
+      let action = 'Find User Vaults by Id'
+      Vaults.find({creatorId: req.params.userId})
+        .then(vaults => {
+          res.send(handleResponse(action, vaults))
+        }).catch(error => {
+          return next(handleResponse(action, null, error))
+        })
+    }
   }
 }
 

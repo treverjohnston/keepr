@@ -32,12 +32,12 @@
           </v-btn>
           <zoom></zoom>
         </v-dialog>
-        <v-btn icon>
+        <!-- <v-btn icon>
           <v-icon>library_add</v-icon>
         </v-btn>
         <v-btn icon>
           <v-icon>share</v-icon>
-        </v-btn>
+        </v-btn> -->
       </v-card-actions>
     </v-card>
   </div>

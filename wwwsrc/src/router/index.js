@@ -18,7 +18,7 @@ export default new Router({
       component: Hello
     },
     {
-      path: '/vault',
+      path: '/profile/:userId/vaults',
       name: 'Vault',
       component: Vault
     },
@@ -28,7 +28,7 @@ export default new Router({
       component: KeepCheck
     },
     {
-      path: '/profile',
+      path: '/profile/:profileId',
       name: 'Profile',
       component: Profile
     },

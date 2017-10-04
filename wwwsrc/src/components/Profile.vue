@@ -30,7 +30,7 @@
                 return this.$store.state.userInfo
             },
             vaults() {
-                return this.$store.state.vaults
+                return this.$store.state.profileVaults
             },
             loggedIn() {
                 return this.$store.state.loggedIn
@@ -40,6 +40,7 @@
         },
         mounted() {
             this.$store.dispatch('getUserVaults')
+            this.$store.dispatch('getArtistProfile', this.$route.params.profileId)
         },
         components:{
             Vaultcard

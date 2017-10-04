@@ -6,7 +6,7 @@
           <v-icon>home</v-icon>
         </v-btn>
       </router-link>
-      <router-link :to="'/profile'">
+      <router-link :to="`/profile/${info._id}`">
         <v-btn icon light>
           <v-icon>perm_identity</v-icon>
         </v-btn>
@@ -51,7 +51,12 @@
         title: 'Keepr'
       }
     },
-    components: {
+    computed: {
+      info() {
+        return this.$store.state.userInfo
+      }
+    },
+      components: {
       Login
     },
     mounted() {

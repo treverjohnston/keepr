@@ -9,29 +9,22 @@
             </div>
             <v-card-title>
                 <div>
-                    <p class="grey--text">{{item.title}}</p>
+                    <h5 class="grey--text text-xs-center">{{item.title}}</h5>
                 </div>
             </v-card-title>
-            <v-slide-y-transition>
-                <v-card-text v-if="show">
-                    <div v-for="tag in item.tags">
-                        <p>{{tag}}</p>
-                    </div>
-                </v-card-text>
-            </v-slide-y-transition>
             <v-card-actions class="white">
                 <v-spacer></v-spacer>
-                <router-link :to="'vault'">
+                <router-link :to="`${user._id}/vaults`">
                     <v-btn primary @click="setVault(item)" dark>
                         <v-icon>launch</v-icon>
                     </v-btn>
                 </router-link>
-                <v-btn icon>
-                    <v-icon>library_add</v-icon>
+                <v-btn @click="deleteVault(item._id)" icon>
+                    <v-icon class="red--text">delete_forever</v-icon>
                 </v-btn>
-                <v-btn icon>
+                <!-- <v-btn icon>
                     <v-icon>share</v-icon>
-                </v-btn>
+                </v-btn> -->
             </v-card-actions>
         </v-card>
     </div>
@@ -51,6 +44,11 @@
                 dialog2: ''
             }
         },
+        computed: {
+            user() {
+                return this.$store.state.userInfo;
+            }
+        },
         methods: {
             redraw() {
                 this.show = !this.show
@@ -58,10 +56,30 @@
             },
             setVault(item) {
                 this.$store.commit('setCurrentVault', item)
+                this.$store.commit('resetState')
                 this.$store.dispatch('getCurrentKeeps', item._id)
             },
             setKeep(item) {
                 this.$store.commit('setKeep', item)
+            },
+            deleteVault(id) {
+                var _this = this
+                swal({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then(function () {
+                    _this.$store.dispatch('deleteVault', id)
+                    swal(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                    )
+                })
             }
         },
         mounted() {
