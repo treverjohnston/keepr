@@ -4,7 +4,7 @@ import vuex from 'vuex'
 import router from '../router'
 
 let api = axios.create({
-    baseURL: '//keepur.herokuapp.com/api',
+    baseURL: '//keepur.herokuapp.com/api/',
     timeout: 2000,
     withCredentials: true
 })
@@ -19,106 +19,7 @@ vue.use(vuex)
 
 var store = new vuex.Store({
     state: {
-        dummy: [
-            {
-                url: "https://loremFlickr.com/400/400/dog",
-                author: "t-swizzle",
-                keeps: 35,
-                tags: ["cool", "neat-o", "cat"],
-                views: 32
-            },
-            {
-                url: "https://loremFlickr.com/600/700/dog",
-                author: "t-swizzle",
-                keeps: 35,
-                tags: ["cool", "what", "cat"],
-                views: 78
-            },
-            {
-                url: "https://loremFlickr.com/200/300/dog",
-                author: "t-swizzle",
-                keeps: 35,
-                tags: ["cool", "large", "cat"],
-                views: 78
-            },
-            {
-                url: "https://loremFlickr.com/1600/1300/dog",
-                author: "t-swizzle",
-                keeps: 35,
-                tags: ["cool", "neat-o", "cat"],
-                views: 78
-            },
-            {
-                url: "https://loremFlickr.com/800/700/dog",
-                author: "t-swizzle",
-                keeps: 35,
-                tags: ["cool", "neat-o", "cat"],
-                views: 78
-            },
-            {
-                url: "https://loremFlickr.com/900/700/dog",
-                author: "t-swizzle",
-                keeps: 35,
-                tags: ["cool", "neat-o", "cat"],
-                views: 78
-            },
-            {
-                url: "https://loremFlickr.com/500/300/dog",
-                author: "t-swizzle",
-                keeps: 35,
-                tags: ["cool", "neat-o", "cat"],
-                views: 78
-            },
-            {
-                url: "https://loremFlickr.com/600/600/dog",
-                author: "t-swizzle",
-                keeps: 35,
-                tags: ["cool", "neat-o", "cat"],
-                views: 78
-            },
-            {
-                url: "https://loremFlickr.com/800/800/dog",
-                author: "t-swizzle",
-                keeps: 35,
-                tags: ["cool", "neat-o", "cat"],
-                views: 78
-            },
-            {
-                url: "https://loremFlickr.com/900/900/dog",
-                author: "t-swizzle",
-                keeps: 35,
-                tags: ["cool", "neat-o", "cat"],
-                views: 78
-            },
-            {
-                url: "https://loremFlickr.com/200/300/dog",
-                author: "t-swizzle",
-                keeps: 35,
-                tags: ["cool", "neat-o", "cat"],
-                views: 78
-            },
-            {
-                url: "https://loremFlickr.com/200/300/dog",
-                author: "t-swizzle",
-                keeps: 35,
-                tags: ["cool", "neat-o", "cat"],
-                views: 78
-            },
-            {
-                url: "https://loremFlickr.com/200/300/dog",
-                author: "t-swizzle",
-                keeps: 35,
-                tags: ["cool", "neat-o", "cat"],
-                views: 78
-            },
-            {
-                url: "https://loremFlickr.com/500/300/dog",
-                author: "t-swizzle",
-                keeps: 35,
-                tags: ["cool", "neat-o", "cat"],
-                views: 78
-            }
-        ],
+        dummy: [],
         current: {},
         userInfo: {},
         dummyVaults: {
