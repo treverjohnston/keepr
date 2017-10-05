@@ -7,6 +7,11 @@
                         <vaultcard :item="item"></vaultcard>
                     </v-flex>
                 </v-layout>
+                <h1>
+                    <v-layout>
+                        Your uploads
+                    </v-layout>
+                </h1>
                 <v-layout row justify-space-around>
                     <v-flex xs12 sm4 md3 lg2 v-masonry-tile fit-width="true" class="item" v-for="item in keeps">
                         <keepview :item="item"></keepview>
@@ -28,9 +33,6 @@
         data() {
             return {
             }
-        },
-        components: {
-            Keepview
         },
         computed: {
             info() {
@@ -54,6 +56,7 @@
             this.$store.dispatch('getUserKeeps', this.$route.params.profileId)
         },
         components: {
+            Keepview,
             Vaultcard
         }
     }

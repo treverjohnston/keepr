@@ -51,12 +51,17 @@
         title: 'Keepr'
       }
     },
+    methods: {
+      log() {
+console.log('youre clicking el button')
+      }
+    },
     computed: {
       info() {
         return this.$store.state.userInfo
       }
     },
-      components: {
+    components: {
       Login
     },
     mounted() {
