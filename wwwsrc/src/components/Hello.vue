@@ -16,7 +16,7 @@
           <v-list>
             <v-form>
               <v-text-field label="Name" v-model="nameAdd" required></v-text-field>
-              <v-text-field label="Url" v-model="urlAdd" required></v-text-field>
+              <!-- <v-text-field label="Url" v-model="urlAdd" required></v-text-field> -->
               <v-text-field label="Description" v-model="descriptionAdd"></v-text-field>
             </v-form>
             <v-btn @click="openCloud" id="upload_widget_opener">
