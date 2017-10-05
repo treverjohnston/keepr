@@ -40,10 +40,27 @@ module.exports = {
           return next(handleResponse(action, null, error))
         })
     }
+  },
+  updateKeeps: {
+    path: '/uservaults/keeps/:keepId',
+    reqType: 'put',
+    method(req, res, next){
+      let action = 'Update Keep views by Id'
+      Keeps.findById({_id: req.params.keepId})
+        .then(keep => {
+          keep.views++
+          Keeps.findByIdAndUpdate(keep._id)
+          res.send(handleResponse(action, keep))
+        }).catch(error => {
+          return next(handleResponse(action, null, error))
+        })
+    }
   }
 }
 
-
+// function updateKeepViews(keep) {
+//   keep.views++
+// }
 function handleResponse(action, data, error) {
     var response = {
       action: action,

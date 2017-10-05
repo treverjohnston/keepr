@@ -1,44 +1,45 @@
 <template>
   <div class="hello">
     <v-layout>
+      <div v-if="loggedIn">
         <v-bottom-sheet lazy v-model="keep">
-            <v-btn slot="activator" fab dark small class="purple">
-                <v-icon>note_add</v-icon>
-              </v-btn>
-            <h2 class="elevation-8 grey lighten-3">Add Keep</h2>
-            <div v-if="urlAdd !== ''">
-              <v-card class="image">
-                <img class="img" :src="urlAdd" alt="your image">
-
-              </v-card>
-            </div>
-            <v-list>
-              <v-form>
-                <v-text-field label="Name" v-model="nameAdd" required></v-text-field>
-                <v-text-field label="Url" v-model="urlAdd" required></v-text-field>
-                <v-text-field label="Description" v-model="descriptionAdd"></v-text-field>
-              </v-form>
-              <v-btn @click="openCloud" id="upload_widget_opener">
-                Add Keep
-              </v-btn>
-            </v-list>
-          </v-bottom-sheet>
-      
-      <v-bottom-sheet lazy v-model="bar">
-        <v-btn slot="activator" fab dark small class="green">
-          <v-icon>library_add</v-icon>
-        </v-btn>
-        <h2 class="elevation-8 grey lighten-3">Add Vault</h2>
-        <v-list>
-          <v-form>
-            <v-text-field label="Name" v-model="nameAdd" required></v-text-field>
-            <v-text-field label="Description" v-model="descriptionAdd"></v-text-field>
-          </v-form>
-          <v-btn @click="addVault">
-            Add Vault
+          <v-btn slot="activator" fab dark small class="purple">
+            <v-icon>note_add</v-icon>
           </v-btn>
-        </v-list>
-      </v-bottom-sheet>
+          <h2 class="elevation-8 grey lighten-3">Add Keep</h2>
+          <div v-if="urlAdd !== ''">
+            <v-card class="image">
+              <img class="img" :src="urlAdd" alt="your image">
+
+            </v-card>
+          </div>
+          <v-list>
+            <v-form>
+              <v-text-field label="Name" v-model="nameAdd" required></v-text-field>
+              <v-text-field label="Url" v-model="urlAdd" required></v-text-field>
+              <v-text-field label="Description" v-model="descriptionAdd"></v-text-field>
+            </v-form>
+            <v-btn @click="openCloud" id="upload_widget_opener">
+              Add Keep
+            </v-btn>
+          </v-list>
+        </v-bottom-sheet>
+        <v-bottom-sheet lazy v-model="bar">
+          <v-btn slot="activator" fab dark small class="green">
+            <v-icon>library_add</v-icon>
+          </v-btn>
+          <h2 class="elevation-8 grey lighten-3">Add Vault</h2>
+          <v-list>
+            <v-form>
+              <v-text-field label="Name" v-model="nameAdd" required></v-text-field>
+              <v-text-field label="Description" v-model="descriptionAdd"></v-text-field>
+            </v-form>
+            <v-btn @click="addVault">
+              Add Vault
+            </v-btn>
+          </v-list>
+        </v-bottom-sheet>
+      </div>
     </v-layout>
     <div v-masonry transition-duration="0.3s" item-selector=".item" class="hellocards ">
       <v-layout row justify-space-around>
@@ -75,6 +76,9 @@
       info() {
         return this.$store.state.userInfo;
       },
+      loggedIn() {
+        return this.$store.state.loggedIn;
+      }
     },
     methods: {
       refresh() {
@@ -123,14 +127,16 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .img{
+  .img {
     /* width: 100%; */
     max-height: 15rem;
     margin: 0 auto;
   }
-  .image{
+
+  .image {
     margin: 0 auto;
   }
+
   .item {
     padding: 0 .5vw 0 .5vw;
     margin: 0 auto;

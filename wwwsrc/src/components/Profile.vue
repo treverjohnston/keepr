@@ -3,17 +3,12 @@
         <div v-if="loggedIn">
             <div v-masonry transition-duration="0.3s" item-selector=".item" class="hellocards">
                 <v-layout row justify-space-around>
-                    <v-flex xs12 sm4 md3 lg2 v-masonry-tile fit-width="true" class="item" v-for="item in vaults">
+                    <v-flex xs12 sm6 md4 v-masonry-tile fit-width="true" class="item" v-for="item in vaults">
                         <vaultcard :item="item"></vaultcard>
                     </v-flex>
                 </v-layout>
-                <h1>
-                    <v-layout>
-                        Your uploads
-                    </v-layout>
-                </h1>
                 <v-layout row justify-space-around>
-                    <v-flex xs12 sm4 md3 lg2 v-masonry-tile fit-width="true" class="item" v-for="item in keeps">
+                    <v-flex xs12 sm6 md4 v-masonry-tile fit-width="true" class="item" v-for="item in keeps">
                         <keepview :item="item"></keepview>
                     </v-flex>
                 </v-layout>
@@ -45,7 +40,7 @@
                 return this.$store.state.loggedIn
             },
             keeps() {
-              return this.$store.state.userKeeps
+                return this.$store.state.userKeeps
             }
         },
         methods: {

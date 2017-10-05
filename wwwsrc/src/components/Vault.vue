@@ -2,12 +2,12 @@
         <div class="vault">
           <div v-masonry transition-duration="0.3s" item-selector=".item" class="hellocards">
             <v-layout row justify-space-around>
-              <v-flex xs12 sm4 md3 lg2 v-masonry-tile fit-width="true" class="item" v-for="item in blocks">
+              <v-flex xs12 sm6 md4 v-masonry-tile fit-width="true" class="item" v-for="item in blocks">
                 <vaultview :item="item"></vaultview>
               </v-flex>
             </v-layout>
             <v-layout row justify-space-around>
-              <v-flex xs12 sm4 md3 lg2 v-masonry-tile fit-width="true" class="item" v-for="item in keeps">
+              <v-flex xs12 sm6 md4 v-masonry-tile fit-width="true" class="item" v-for="item in keeps">
                 <hellocard :item="item"></hellocard>
               </v-flex>
             </v-layout>

@@ -8,7 +8,7 @@ var baseUrl = production ? '//keepur.herokuapp.com/' : '//localhost:3000/';
 
 let api = axios.create({
     // baseURL: '//keepur.herokuapp.com/api/',
-    baseURL: baseUrl +'api/',
+    baseURL: baseUrl + 'api/',
     timeout: 4000,
     withCredentials: true
 })
@@ -47,7 +47,7 @@ var store = new vuex.Store({
                 state.vaults = {},
                 state.currentVault = {},
                 state.currentKeeps = {},
-                state.profileInfo = {},
+                state.userKeeps = {},
                 state.profileVaults = {}
         },
         setZoom(state, item) {
@@ -133,6 +133,20 @@ var store = new vuex.Store({
                     commit('handleError', err)
                 })
         },
+        deleteKeep({ commit, dispatch }, obj) {
+            api.delete(`keeps/${obj.keepId}`)
+                .then(res => {
+                    console.log('delete', res)
+                    commit('resetState')
+                    dispatch('getUserKeeps', obj.userId)
+                    dispatch('getKeeps')
+                    dispatch('getArtistProfile', obj.userId)
+                })
+                .catch(err => {
+                    commit('handleError', err)
+                    // router.push('/')
+                })
+        },
         deleteVault({ commit, dispatch }, obj) {
             api.delete(`vaults/${obj.keepId}`)
                 .then(res => {
@@ -142,6 +156,18 @@ var store = new vuex.Store({
                     dispatch('getArtistProfile', obj.userId)
                 })
                 .catch(err => {
+                    commit('handleError', err)
+                    // router.push('/')
+                })
+        },
+        getAllVaults({ commit, dispatch }) {
+            api('vaults')
+                .then(res => {
+                    console.log('settinvaults', res.data.data)
+                    commit('setVaults', res.data.data)
+                })
+                .catch(err => {
+                    console.log("eerrrroror")
                     commit('handleError', err)
                     // router.push('/')
                 })
@@ -242,23 +268,40 @@ var store = new vuex.Store({
                     // router.push('/')
                 })
         },
+        viewPlus({ commit, dispatch }, obj) {
+            console.log('obj', obj)
+            api.put(`uservaults/keeps/${obj.keepId}`)
+            .then(res => {
+                console.log('updatedkeep', res)
+                // commit('resetState')
+                dispatch('getKeeps')
+            })
+            .catch(err => {
+                console.log("eerrrroror")
+                commit('handleError', err)
+                // router.push('/')
+            })
+        },
         getAuth({ commit, dispatch }) {
             auth('authenticate')
                 .then(res => {
-                    // console.log("info", res)
-                    if (!res.data) {
+                    console.log("info", res)
+                    if (res.data.data == null) {
+                        console.log("failed login because oops")
                         return router.push('/')
                     }
-                    commit('setInfo', res.data)
-                    commit('setLogged')
+                    else if (res.data.data._id !== null) {
+                        console.log("success")
+                        commit('setInfo', res.data)
+                        commit('setLogged')
+                    } else {
+                        console.log("login failed")
+                    }
                 })
                 .catch(err => {
                     commit('handleError', err)
                     router.push('/')
                 })
-        },
-        viewPlus({ commit, dispatch }) {
-            console.log("add a plus view function")
         },
         createAccount({ commit, dispatch }, obj) {
             auth.post('register', obj)

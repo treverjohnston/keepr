@@ -6,11 +6,13 @@
           <v-icon>home</v-icon>
         </v-btn>
       </router-link>
-      <router-link :to="`/profile/${info._id}`">
-        <v-btn icon light>
-          <v-icon>perm_identity</v-icon>
-        </v-btn>
-      </router-link>
+      <div v-show="loggedIn">
+        <router-link :to="`/profile/${info._id}`">
+          <v-btn icon light>
+            <v-icon>perm_identity</v-icon>
+          </v-btn>
+        </router-link>
+      </div>
       <v-btn icon light @click.stop="fixed = !fixed">
         <v-icon>remove</v-icon>
       </v-btn>
@@ -53,12 +55,15 @@
     },
     methods: {
       log() {
-console.log('youre clicking el button')
+        console.log('youre clicking el button')
       }
     },
     computed: {
       info() {
         return this.$store.state.userInfo
+      },
+      loggedIn(){
+        return this.$store.state.loggedIn
       }
     },
     components: {
