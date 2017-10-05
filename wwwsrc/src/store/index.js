@@ -101,18 +101,16 @@ var store = new vuex.Store({
             // console.log('ojb', obj)
             for (var i = 0; i < obj.length; i++) {
                 var item = obj[i]
-                if (!state.currentKeeps[item._id]) {
                     vue.set(state.currentKeeps, item._id, item)
-                }
+                
             }
         },
         setAllKeeps(state, obj) {
             // console.log('ojb', obj)
             for (var i = 0; i < obj.length; i++) {
                 var item = obj[i]
-                if (!state.keeps[item._id]) {
-                    vue.set(state.keeps, item._id, item)
-                }
+                vue.set(state.keeps, item._id, item)
+
             }
             // console.log('keepstate',state.keeps)
         },
@@ -269,18 +267,18 @@ var store = new vuex.Store({
                 })
         },
         viewPlus({ commit, dispatch }, obj) {
-            console.log('obj', obj)
+            // console.log('obj', obj)
             api.put(`uservaults/keeps/${obj.keepId}`)
-            .then(res => {
-                console.log('updatedkeep', res)
-                // commit('resetState')
-                dispatch('getKeeps')
-            })
-            .catch(err => {
-                console.log("eerrrroror")
-                commit('handleError', err)
-                // router.push('/')
-            })
+                .then(res => {
+                    console.log('updatedkeep', res)
+                    // commit('resetState')
+                    dispatch('getKeeps')
+                })
+                .catch(err => {
+                    console.log("eerrrroror")
+                    commit('handleError', err)
+                    // router.push('/')
+                })
         },
         getAuth({ commit, dispatch }) {
             auth('authenticate')
@@ -331,10 +329,14 @@ var store = new vuex.Store({
                 .then(res => {
                     swal({
                         title: 'Logged in as',
-                        text: res.data.username,
+                        text: res.data.data.name,
                         timer: 2000
                     }).then(
-                        function () { },
+                        function () {
+                            commit('setInfo', res.data)
+                            commit('setLogged')
+                            console.log('logres', res)
+                        },
                         // handling the promise rejection
                         function (dismiss) {
                             if (dismiss === 'timer') {
@@ -345,9 +347,11 @@ var store = new vuex.Store({
                             commit('handleError', err)
                             router.push('/')
                         })
-                    commit('setLogged')
-                    commit('resetState')
                     console.log(res)
+                })
+                .catch(err => {
+                    commit('handleError', err)
+                    router.push('/')
                 })
         },
         logout({ commit, dispatch }) {

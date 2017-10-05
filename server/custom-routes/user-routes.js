@@ -49,8 +49,8 @@ module.exports = {
       Keeps.findById({_id: req.params.keepId})
         .then(keep => {
           keep.views++
-          Keeps.findByIdAndUpdate(keep._id)
           res.send(handleResponse(action, keep))
+          keep.save()
         }).catch(error => {
           return next(handleResponse(action, null, error))
         })

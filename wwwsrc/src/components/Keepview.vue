@@ -10,7 +10,7 @@
         <v-dialog v-model="dialog2" lazy absolute>
           <v-btn primary class="btn" @click="setKeep(item)" dark slot="activator">
             <v-icon>play_for_work</v-icon>
-            <p>{{item.keeps}}</p>
+            <p>{{item.vaults.length}}</p>
           </v-btn>
           <v-card>
             <v-flex xs12>
@@ -80,7 +80,7 @@
                 <v-dialog v-model="dialog2" lazy absolute>
                   <v-btn primary class="btn" @click="dialog = !dialog" dark slot="activator">
                     <v-icon>play_for_work</v-icon>
-                    <p>{{item.keeps}}</p>
+                    <p>{{item.vaults.length}}</p>
                   </v-btn>
                   <v-card>
                     <v-flex xs12>
