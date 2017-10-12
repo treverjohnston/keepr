@@ -3,7 +3,6 @@
         <div v-if="logged">
             <v-container fluid>
                 <v-flex xs12>
-                    <p>Add New Keep/Vault</p>
                     <v-btn @click="logout">Logout</v-btn>
                 </v-flex>
             </v-container>

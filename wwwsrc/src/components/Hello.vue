@@ -140,6 +140,7 @@
   .item {
     padding: 0 .5vw 0 .5vw;
     margin: 0 auto;
+    /* min-width: 30vw; */
   }
 
   .hellocards {

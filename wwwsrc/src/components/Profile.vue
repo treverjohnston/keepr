@@ -1,17 +1,27 @@
 <template>
     <div class="profile">
         <div v-if="loggedIn">
+            <v-layout>
+                <v-flex xs12>
+                    <v-btn @click.stop="which = true">Your Vaults</v-btn>
+                    <v-btn @click.stop="which = false">Your Keeps</v-btn>
+                </v-flex>
+            </v-layout>
             <div v-masonry transition-duration="0.3s" item-selector=".item" class="hellocards">
-                <v-layout row justify-space-around>
-                    <v-flex xs12 sm6 md4 v-masonry-tile fit-width="true" class="item" v-for="item in vaults">
-                        <vaultcard :item="item"></vaultcard>
-                    </v-flex>
-                </v-layout>
-                <v-layout row justify-space-around>
-                    <v-flex xs12 sm6 md4 v-masonry-tile fit-width="true" class="item" v-for="item in keeps">
-                        <keepview :item="item"></keepview>
-                    </v-flex>
-                </v-layout>
+                <div v-if="which == true">
+                    <v-layout row justify-space-around>
+                        <v-flex xs12 sm6 md4 v-masonry-tile fit-width="true" class="item" v-for="item in vaults">
+                            <vaultcard :item="item"></vaultcard>
+                        </v-flex>
+                    </v-layout>
+                </div>
+                <div v-if="which == false">
+                    <v-layout row justify-space-around>
+                        <v-flex xs12 sm6 md4 v-masonry-tile fit-width="true" class="item" v-for="item in keeps">
+                            <keepview :item="item"></keepview>
+                        </v-flex>
+                    </v-layout>
+                </div>
             </div>
         </div>
         <div v-else>
@@ -27,6 +37,7 @@
         name: 'profile',
         data() {
             return {
+                which: true
             }
         },
         computed: {
@@ -63,6 +74,7 @@
     .item {
         padding: 0 .5vw 0 .5vw;
         margin: 0 auto;
+        /* min-width: 31.6vw; */
     }
 
     .hellocards {
