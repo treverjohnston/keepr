@@ -4,7 +4,7 @@
             <v-layout>
                 <v-flex xs12>
                     <v-btn @click.stop="which = true">Your Vaults</v-btn>
-                    <v-btn @click.stop="which = false">Your Keeps</v-btn>
+                    <v-btn @click.stop="which = false">Your Uploaded Keeps</v-btn>
                 </v-flex>
             </v-layout>
             <div v-masonry transition-duration="0.3s" item-selector=".item" class="hellocards">
